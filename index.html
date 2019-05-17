@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Required meta tags End -->
+
+	<!-- JQuery and JQuery-UI -->
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	 crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+	 crossorigin="anonymous"></script>
+	<!-- JQuery and JQuery-UI End -->
+
+	<!-- My Scripts -->
+	<script type="text/javascript" src="./Scripts/Tools/search.js"></script>
+	<script type="text/javascript" src="./Scripts/Tools/cross-payments.js"></script>
+	<script type="text/javascript" src="./Scripts/Tools/error-tool.js"></script>
+	<script type="text/javascript" src="./Scripts/Tools/schedule-tool.js"></script>
+	<script type="text/javascript" src="./Scripts/Tools/q.js"></script>
+	<script type="text/javascript" src="./Scripts/Views/views.js"></script>
+	<script type="text/javascript" src="./Scripts/general.js"></script>
+	<!-- My Scripts End -->
+
+	<!-- Bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	 crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	 crossorigin="anonymous">
+	<!-- Bootstrap End -->
+
+	<!-- Style -->
+	<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+	<link rel="stylesheet" href="./Styles/style.css">
+	<!-- Style End -->
+
+	<title>S.O.P</title>
+</head>
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark">
+		<a class="navbar-brand" onclick="home()" href="#">S.O.P</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" onclick="toggleInfo(fraud)" href="#">Fraud</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" onclick="toggleInfo(depositError)" href="#">Deposit Error</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+					 aria-haspopup="true" aria-expanded="false">
+						Withdrawal Error
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" onclick="wdError(ecoPayzVouchersChina)" href="#">EcoPayz, Vouchers & China</a>
+						<a class="dropdown-item" onclick="wdError(kartsizError)" href="#">Kartsiz</a>
+						<a class="dropdown-item" onclick="wdError(inPayError)" href="#">InPay</a>
+						<a class="dropdown-item" onclick="wdError(gpaysafeError)" href="#">GPaysafe</a>
+						<a class="dropdown-item" onclick="wdError(bankTRError)" href="#">Bank TR</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" onclick="toggleInfo(errorTool)" href="#">Error Tool</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" onclick="toggleInfo(withdrawals)" href="#">Cross Payments</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" onclick="toggleInfo(scheduleMaker)" href="#">Schedule Maker</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" onclick="toggleInfo(q)" href="#">Q</a>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" id="tags" aria-label="Search">
+				<button class="btn btn-dark" type="submit" onclick="search()">Search</button>
+			</form>
+		</div>
+	</nav>
+</header>
+
+<body>
+	<div id="wdErrorProc" class="toggleable">
+		<span id="errorProcDetails">
+			<ul id="gpaysafeError" class="wdErrors">
+				<li>
+					<p>Send Email to support@gpaysafe.com (use the tool for template)</p>
+				</li>
+				<li>
+					<p>Create Ticket (WD Error (Gpaysafe)) - Delayed (14:30/15:30) and include turkish support</p>
+				</li>
+				<li>
+					<p>After we receive an answer, wo DO NOT reset, but leave the case starred in the inbox for TL to check</p>
+				</li>
+				<li>
+					<p>Check if there are any recent payments to that bank account
+						If Yes - Disable the withdrawals and leave a note “HOLD WD until bank details for WD **** are confirmed”</p>
+				</li>
+				<li>
+					<p>If necessary, the client should be called to confirm that the bank account is active and belongs to him</p>
+					<ul>
+						<li>
+							<p>If the there have been changes or details are different - we disabe the bank account</p>
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul id="ecoPayzVouchersChina" class="wdErrors">
+				<label>EcoPayz</label>
+				<li>
+					<p>If the errors are related to technical issues:</p>
+				</li>
+				<ul>
+					<li>
+						<p>Make sure the error is at Ecopayz side</p>
+					</li>
+					<li>
+						<p>check if transaction details are present:</p>
+					</li>
+					<ul>
+						<li>
+							<p>If transaction details are present, the case has to be forwarded to martina@tempobet.com
+								to check the status of the transaction in Ecopayz</p>
+						</li>
+						<li>
+							<p>If transaction details are not present, it is safe to reset the transaction and try paying it again</p>
+						</li>
+					</ul>
+				</ul>
+				<li>
+					<p>if the errors are related to limits imposed by Ecopayz, we have to check with them for more information
+						at customersupport@ecopayz.com by providing them names and ecopayz account</p>
+				</li>
+				<label>Jeton</label>
+				<li>
+					<p>All withdrawals are left at status “error in transaction”</p>
+				</li>
+				<li>
+					<p>Send for checks to techsupport@jeton.com; cc: Gergana</p>
+				</li>
+				<li>
+					<p>Add the transaction to file</p>
+				</li>
+				<label>Vouchers</label>
+				<li>
+					<p>These errors are usually due to technical reasons. In such cases, send the case for checks to the voucher
+						provider to make sure no voucher was issued. After this is confirmed, reset and approve (and eventually try
+						to
+						complete the payment again)</p>
+				</li>
+				<ul>
+					<li>
+						<p>for Astropay Mobile, we do not reset payments until the case has been confirmed with voucher provider
+							and then with Martina for duplicate payments</p>
+					</li>
+				</ul>
+				<label>SD Pay</label>
+				<li>
+					<p>Open a ticket and delay for 1 day</p>
+				</li>
+				<li>
+					<p>Send an e-mail to freeze.chau@tempobet.com; CC: cn@tempobet.com to check if the WD was successful or not
+					</p>
+				</li>
+				<li>
+					<p>If WD is confirmed successful, forward the e-mail to it@tempobet.com to change the status from error in
+						transaction to completed</p>
+				</li>
+				<li>
+					<p>If WD is confirmed unsuccessful, reset the payment and send again</p>
+				</li>
+				<li>
+					<p>If WD returns for the second time, decline the withdrawal with reason “incorrect bank details”</p>
+				</li>
+			</ul>
+
+			<ul id="kartsizError" class="wdErrors">
+				<li>
+					<p>In order to be successful, Kartsiz withdrawals need the following details to be
+						correct – branch code, account number, ID number, mobile phone, date of birth, names.
+						Different banks impose different Kartsiz withdrawals limits that we have to check as well:<br>
+						Garanti Bankası: 20.000 TRY monthly limit;<br>
+						İş Bankası: 18.000 TRY daily limit;<br>
+						Akbank: 19.000 TRY daily limit;<br>
+						Yapı Kredi: 19.000 TRY daily limit;</p>
+				</li>
+				<li>
+					<p>After the alert is triggered, the first thing to check is if the branch code and account number
+						are present in the IBAN. If the phone, DOB and TC kimlik number match</p>
+				</li>
+				<li>
+					<p>If it is first withdrawal to this bank account or there have been previous successful payments to this
+						account, we reset and approve again, so 2 other operators can try to make the payment</p>
+				</li>
+				<ul>
+					<li>
+						<p>If these are unsuccessful too, we may call the client to verify the bank details with him and to
+							ask him if he reached kartsiz limits</p>
+					</li>
+					<ul>
+						<li>
+							<p>If bank account details have changed, they are deleted from the bank accouts tab, then we reset
+								the withdrawal and cancel it with reason “incorrect bank details”</p>
+						</li>
+						<li>
+							<p>If daily limits are reached, we reset the withdrawal, open a delayed ticket for the next morning
+								to remind us to approve it again</p>
+						</li>
+						<li>
+							<p>If monthly limits are reached, we can either advise the client to withdraw the funds to another
+								bank account, or we can forward to senior management to process the funds using another provider</p>
+						</li>
+					</ul>
+				</ul>
+				<li>
+					<p>If it is first withdrawal to a new bank account and there are discrepancies in the details, we have to
+						cancel
+						the payment with reason “wrong bank details”</p>
+				</li>
+			</ul>
+
+
+			<ul id="inPayError" class="wdErrors">
+				<p>InPay errors are returned to us with a general reason “rejected by the bank”</p>
+				<p>In these cases:</p>
+				<li>
+					<p>We call the client to check if the bank details are incorrect or the bank account is closed</p>
+				</li>
+				<li>
+					<p>in case there is an issue with the bank account, i.e. wrong IBAN, bank account belongs to someone else,
+						bank account is closed, etc.:</p>
+				</li>
+				<ul>
+					<li>
+						<p>Reset the withdrawal</p>
+					</li>
+					<li>
+						<p>Cancel the withdrawal with reason “incorrect bank details / fees”</p>
+					</li>
+					<li>
+						<p>Decline the bank account</p>
+					</li>
+					<li>
+						<p>In case the client claims that all of his bank details are correct, the case should be forwarded
+							to Gergana/Martina for furhter investigation with InPay</p>
+					</li>
+				</ul>
+			</ul>
+
+			<ul id="bankTRError" class="wdErrors">
+				<li>
+					<p>In case of “invalid account information” or “wrong beneficiary” we disable the withdrawals and leave a note
+						“HOLD Wds until bank details for WD **** are confirmed”</p>
+				</li>
+				<ul>
+					<li>
+						<p>Then forward the case to Support to call the client and confirm the bank details and that the bank
+							account is still active</p>
+					</li>
+					<ul>
+						<li>
+							<p>If the client confirms:</p>
+						</li>
+						<ul>
+							<li>
+								<p>Remove the sanctions</p>
+							</li>
+							<li>
+								<p>Mark “hold wds” note as unimportant</p>
+							</li>
+							<li>
+								<p>Reset the withdrawa</p>
+							</li>
+							<li>
+								<p>Approve it again for another attempt</p>
+							</li>
+						</ul>
+						<li>
+							<p>If the there have been changes or details are different - we act accordingly by either disabling the
+								bank account or deleting the details
+								and declining the withdrawal so the client will be able to enter correct details</p>
+						</li>
+					</ul>
+				</ul>
+				<li>
+					<p>If the payment is unsuccessful for any other reason, the case has to be forwarded to Gergana or Martina to
+						check with the provider</p>
+				</li>
+			</ul>
+		</span>
+	</div>
+
+	<div id="errorTool" class="toggleable">
+		<span id="errorToolFormWrapper">
+			<form id="errorToolForm">
+				<span id="inputBoxWrapper">
+					<p>Paste Input Here</p>
+					<textarea name="inputBox" rows="30" cols="50" class="box" id="inputBox"></textarea>
+					<div id="error-tool-buttons">
+						<div class="tooltipTest">
+							<input id="WDErrorButton" value="WD Error Template" type="button" onclick="emailTemplate(inchange(), outputBox, 'WDError')"
+							 class="mybtn">
+							<span><img src="./Img/wdError.jpg" /></span>
+						</div>
+						<div class="tooltipTest">
+							<input id="templateButton" value="Missing WD Template" type="button" onclick="emailTemplate(inchange(), outputBox, 'MissingWD')"
+							 class="mybtn">
+							<span><img src="./Img/MissingWD.jpg" /></span>
+						</div>
+					</div>
+				</span>
+				<span id="outputBoxWrapper">
+					<p style="margin-left: 10%">Template</p>
+					<ul>
+						<li>
+							<div class="tooltipRight">
+								<input readonly onclick="copyToClipboard()" onmouseout="outFunc()" id="contact" placeholder="Contacts..."></input>
+								<span class="tooltiptext copyTooltip">Click to Copy</span>
+							</div>
+						</li>
+						<li>
+							<div class="tooltipRight">
+								<input readonly onclick="copyToClipboard()" onmouseout="outFunc()" id="subject" placeholder="Subject..."></input>
+								<span class="tooltiptext copyTooltip">Click to Copy</span>
+							</div>
+						</li>
+						<li>
+							<div class="tooltipRight">
+								<textarea onclick="copyToClipboard()" onmouseout="outFunc()" name="outputBox" rows="30" cols="50" class="box"
+								 id="outputBox"></textarea>
+								<span class="tooltiptext copyTooltip">Click to Copy</span>
+							</div>
+						</li>
+					</ul>
+				</span>
+				<p>&nbsp;</p>
+			</form>
+		</span>
+		<span id="tableStuffWrapper">
+			<div id="tableStuff">
+				<table>
+					<span>
+						<table id="myTable">
+							<tr>
+								<th>Merchant ID</th>
+								<th>Reference ID</th>
+								<th>Amount</th>
+								<th>Date</th>
+						</table>
+					</span>
+					<span style="margin: 10%" id="errorToolTableButtons">
+						<span style="margin: 10px">
+							<input name="addToTable" value="+" type="button" onclick="addToTable(inchange())" class="mybtn">
+						</span>
+						<br>
+						<span style="margin: 10px">
+							<input name="deleteFromTable" value="-" type="button" onclick="deleteFromTable()" class="mybtn" style="padding: 10px">
+						</span>
+						<br>
+						<span style="margin: 10px">
+							<input name="export" value="Export" type="button" onclick="fnExcelReport()" class="mybtn">
+						</span>
+					</span>
+				</table>
+			</div>
+		</span>
+	</div>
+	
+	<div id="withdrawals" class="toggleable">
+		<div id="accordion">
+			<h3 id="turkey">Turkey Crosspayments General Rules</h3>
+			<div>
+				<ul id="turkishDepositMethods" class="buttons depositMethods">
+					<a>Deposits with</a>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">BankTransfer</button>
+							<span class="tooltiptext">Bank TR<br> GP Bank Transfer</span>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">Vouchers</button>
+							<span class="tooltiptext">PayKwik<br> PayKasa<br> Astropay Cards<br> Jeton</span>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">E-Wallets</button>
+							<span class="tooltiptext">ecoPayz<br> Jeton Wallet</span>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">GP Papara</button>
+							<span class="tooltiptext">Or GP Bank Transfer Papara</span>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">Bitcoins</button>
+							<span class="tooltiptext">Not necessarily the last deposit!</span>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">CEP Deposits</button>
+							<span class="tooltiptext">ISCEP<br> GARANTI CEPBANK<br> AKBANKCEP<br> Yapi Credi<br> Denizbank<br> TEB<br>
+								ATM(CEP)</span>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">QR</button>
+							<span class="tooltiptext">ATM(QR)</span>
+						</div>
+					</li>
+				</ul>
+				<ul id="turkishWithdrawalMethods" class="buttons withdrawalMethods">
+					<a>Can withdrawal with</a>
+					<li>
+						<div>
+							<button class="mybtn">Bank Transfer</button>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipRight">
+							<button class="mybtn">GP Papara</button>
+							<span class="tooltiptext">OK Only if GP Bank Transfer is Papara</span>
+						</div>
+					</li>
+					<li>
+						<div>
+							<button class="mybtn">E-wallet</button>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipRight">
+							<button class="mybtn">Bitcoins</button>
+							<span class="tooltiptext">Can only wd if previously deposited with Bitcoins</span>
+						</div>
+					</li>
+					<li>
+						<div>
+							<button class="mybtn">Voucher</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<h3 id="brazil">Brazil Crosspayments General Rules</h3>
+			<div>
+				<ul id="brazilDepositMethods" class="buttons depositMethods">
+					<a>Deposits with</a>
+					<li>
+						<div>
+							<button class="mybtn">AstroPay Direct</button>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">vCreditos</button>
+							<span class="tooltiptext">vCreditos<br>vCreditos VSI</span>
+						</div>
+					</li>
+					<li>
+						<div>
+							<button class="mybtn">EcoPayz</button>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">Vouchers</button>
+							<span class="tooltiptext">AstroPay Cards</span>
+						</div>
+					</li>
+				</ul>
+				<ul id="brazilWithdrawalMethods" class="buttons withdrawalMethods">
+					<a>Can withdrawal with</a>
+					<li>
+						<div>
+							<button class="mybtn">AstroPay CashOut</button>
+						</div>
+					</li>
+					<li>
+						<div>
+							<button class="mybtn">vCreditos</button>
+						</div>
+					</li>
+					<li>
+						<div>
+							<button class="mybtn">EcoPayz</button>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipRight">
+							<button class="mybtn">Voucher</button>
+							<span class="tooltiptext">AstroPay Cards</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<h3 id="china">China Crosspayments General Rules</h3>
+			<div>
+				<ul id="chineseDepositMethods" class="buttons depositMethods">
+					<a>Deposits with</a>
+					<li>
+						<div>
+							<button class="mybtn">SD Pay</button>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">E-Wallets</button>
+							<span class="tooltiptext">EcoPayz</span>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipLeft">
+							<button class="mybtn">Vouchers</button>
+							<span class="tooltiptext">AstroPay Cards</span>
+						</div>
+					</li>
+				</ul>
+				<ul id="chineseWithdrawalMethods" class="buttons withdrawalMethods">
+					<a>Can withdrawal with</a>
+					<li>
+						<div>
+							<button class="mybtn">SD Pay</button>
+						</div>
+					</li>
+					<li>
+						<div class="tooltipRight">
+							<button class="mybtn">Voucher</button>
+							<span class="tooltiptext">AstroPay Cards</span>
+						</div>
+					</li>
+					<li>
+						<div>
+							<button class="mybtn">Bitcoins</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="fraud" class="toggleable">
+		<h1>COMING SOON</h1>
+	</div>
+
+	<div id="depositError" class="toggleable">
+		<h1>COMING SOON</h1>
+	</div>
+
+	<div id="scheduleMaker" class="toggleable">
+		<button onclick="scheduleMakerTool()">Generate Schedule</button>
+		<input type="date" id="start" min="2018-01-01">
+		<span>Night Shift :</span>
+		<select class="nightShift">
+			<option value="Hristo Aleksiev">Hristo Aleksiev</option>, 
+			<option value="Emil Netsov">Emil Netsov</option>, 
+			<option value="Dimitar Razhankov">Dimitar Razhankov</option>, 
+			<option value="Stanislav Angelkov">Stanislav Angelkov</option>, 
+			<option value="Isuf Hatib">Isuf Hatib</option>, 
+			<option value="Georgi Ganchev">Georgi Ganchev</option>, 
+			<option value="Hulya Atalat">Hulya Atalat</option>, 
+			<option value="Yilmaz Umer">Yilmaz Umer</option>, 
+			<option value="Milan Kirilov">Milan Kirilov</option>, 
+			<option value="Aleksander Vulov">Aleksander Vulov</option>, 
+			<option value="Nikola Ilchev">Nikola Ilchev</option>, 
+			<option value="Velizar Dimov">Velizar Dimov</option>, 
+			<option value="Maryan Yanachkov">Maryan Yanachkov</option>, 
+			<option value="Pavel Dimitrov">Pavel Dimitrov</option>, 
+			<option value="Manol Kosev">Manol Kosev</option>, 
+			<option value="Petya Dicheva">Petya Dicheva</option>, 
+			<option value="Nikoleta Popova">Nikoleta Popova</option>, 
+			<option value="Hristo Kyurkchiev">Hristo Kyurkchiev</option>
+		</select>
+		<select class="nightShift">
+			<option value="Hristo Aleksiev">Hristo Aleksiev</option>, 
+			<option value="Emil Netsov">Emil Netsov</option>, 
+			<option value="Dimitar Razhankov">Dimitar Razhankov</option>, 
+			<option value="Stanislav Angelkov">Stanislav Angelkov</option>, 
+			<option value="Isuf Hatib">Isuf Hatib</option>, 
+			<option value="Georgi Ganchev">Georgi Ganchev</option>, 
+			<option value="Hulya Atalat">Hulya Atalat</option>, 
+			<option value="Yilmaz Umer">Yilmaz Umer</option>, 
+			<option value="Milan Kirilov">Milan Kirilov</option>, 
+			<option value="Aleksander Vulov">Aleksander Vulov</option>, 
+			<option value="Nikola Ilchev">Nikola Ilchev</option>, 
+			<option value="Velizar Dimov">Velizar Dimov</option>, 
+			<option value="Maryan Yanachkov">Maryan Yanachkov</option>, 
+			<option value="Pavel Dimitrov">Pavel Dimitrov</option>, 
+			<option value="Manol Kosev">Manol Kosev</option>, 
+			<option value="Petya Dicheva">Petya Dicheva</option>, 
+			<option value="Nikoleta Popova">Nikoleta Popova</option>, 
+			<option value="Hristo Kyurkchiev">Hristo Kyurkchiev</option>
+		</select>
+		<div id="scheduleTable"></div>
+	</div>
+
+	<div id="q" class="toggleable">
+		<div>
+			<label for="input-one">Quest I</label>
+			<label for="input-two">Quest II</label>
+			<label for="input-three">Quest III</label>
+			<input type="text" id="input-one" placeholder="0" class="quests" onkeyup="findBestQuest()" onClick="this.select();" tabindex="1">
+			<input type="text" id="input-two" placeholder="0" class="quests" onkeyup="findBestQuest()" onClick="this.select();" tabindex="3">
+			<input type="text" id="input-three" placeholder="0" class="quests" onkeyup="findBestQuest()" onClick="this.select();" tabindex="5">
+			<select id="select-one" class="time" onchange="findBestQuest()" tabindex="2">
+				<option value="2.5">2:30</option>
+				<option value="5.5">5:00</option>
+				<option value="7.5">7:30</option>
+				<option value="10">10:00</option>
+			</select>
+			<select id="select-two" class="time" onchange="findBestQuest()" tabindex="4">
+				<option value="2.5">2:30</option>
+				<option value="5.5">5:00</option>
+				<option value="7.5">7:30</option>
+				<option value="10">10:00</option>
+			</select>
+			<select id="select-three" class="time" onchange="findBestQuest()" tabindex="6">
+				<option value="2.5">2:30</option>
+				<option value="5.5">5:00</option>
+				<option value="7.5">7:30</option>
+				<option value="10">10:00</option>
+			</select>
+			<input type="text" id="result-one" placeholder="0" class="result" readonly tabindex="0">
+			<input type="text" id="result-two" placeholder="0" class="result" readonly tabindex="0">
+			<input type="text" id="result-three" placeholder="0" class="result" readonly tabindex="0">
+			<button onClick="clearAll()">Clear</button>
+		</div>
+	</div>
+</body>
+
+</html>
